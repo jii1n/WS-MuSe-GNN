@@ -1,4 +1,4 @@
-gene_name
+Gene Name
 clx-1
 cpr-2
 fmo-2
