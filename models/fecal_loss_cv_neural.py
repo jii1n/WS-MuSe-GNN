@@ -1,6 +1,6 @@
 ## fecal_loss_cv_neural
 import torch
-from utils_ver4 import cross_validate
+from utils import cross_validate
 from neural_models.fecal_loss_mlp import MLP
 from neural_models.gnn import GNN
 import os
