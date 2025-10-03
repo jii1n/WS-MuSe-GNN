@@ -1,4 +1,4 @@
-entrezgene_name
+gene_name
 clx-1
 cpr-2
 fmo-2
