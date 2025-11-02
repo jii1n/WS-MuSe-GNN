@@ -1,6 +1,0 @@
-﻿,chi-square goodness-of-fit test (p-value),Kullback–Leibler divergence (KLD)
-MLP(NLL),p=0.9791,0.199
-MLP(Focal Loss),p=0.9992,0.0008
-GNN,p=0.9800,0.0206
-WS-MuSe-GNN,p=0.9956,0.0042
-
