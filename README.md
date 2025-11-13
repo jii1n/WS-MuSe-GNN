@@ -11,8 +11,8 @@ to:
 - Run the machine learning pipeline immediately.
 - Reproduce the full dataset from public SRA resources if desired.
 
---
-## 📁 Repository Structure
+
+## 📁 data
 
 ```
 .
@@ -27,12 +27,31 @@ to:
 ├── manually_fetched_metadata.p      # Additional manually curated metadata
 ├── get_accession_list.py            # Script for metadata aggregation
 ├── combine_data.R                   # Combine all Kallisto outputs
-├── getmm_and_combat_seq.R    # GeTMM + ComBat-seq normalization pipeline
+├── getmm_and_combat_seq.R           # GeTMM + ComBat-seq normalization pipeline
 ├── create_dummy.ipynb               # Script that generated the demo dataset
 ├── demo_data/
 │   ├── gene_exp.csv
 │   ├── labels.csv
 │   ├── age.csv
 │   └── sra_to_bioproject.csv
-└── README.md
+
 ```
+
+
+## 🧪 1. Execution-ready Demo Dataset 
+
+To run the ML models without downloading large FASTQ files, 
+
+```bash
+ex)
+python3 cv_neural.py \
+  --expression_path gene_exp.csv \
+  --label_path labels.csv \
+  --age_path age.csv \
+  --experiments_path sra_to_bioproject.csv
+
+This dataset preserves the exact data structure expected by the ML pipeline.
+
+
+
+
