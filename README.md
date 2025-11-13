@@ -92,7 +92,7 @@ getmm_gene_expression_no_outliers.csv
 
 ## 🚀 3. Running the Machine Learning Model
 
-A ready-to-use shell script (`mlp_runs.sh`, 'focla_loss_mlp.sh', 'gnn_runs.sh', 'ws_muse_gnn_runs.sh') is provided to execute the ML
+A ready-to-use shell script (`mlp_runs.sh`, `focla_loss_mlp.sh`, `gnn_runs.sh`, `ws_muse_gnn_runs.sh`) is provided to execute the ML
 pipeline.
 
 To run:
