@@ -39,7 +39,7 @@ to:
 ```
 
 
-## 🧪 method 1. Execution-ready Demo Dataset 
+## 🧪 Method 1. Execution-ready Demo Dataset 
 
 To run the ML models without downloading FASTQ files, 
 
@@ -54,7 +54,7 @@ python3 cv_neural.py \
 This dataset preserves the exact data structure expected by the ML pipeline.
 
 
-## 🔧 method 2. How to Reproduce the Full Expression Matrix
+## 🔧 Method 2. How to Reproduce the Full Expression Matrix
 
 The full expression matrix can be regenerated from public SRA data using the  
 steps below. All required metadata and processing scripts are included.
