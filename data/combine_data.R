@@ -2,7 +2,7 @@ library(tximport)
 library(biomaRt)
 library(tidyverse)
 
-# Kallisto의 transcript-level 결과(abundance.tsv)를 gene-level count 데이터로 변환한 후, 모든 샘플을 하나의 count matrix로 결합하고 저장하는 과정
+
 mart <- useEnsembl(biomart = "ensembl",
                    dataset = "celegans_gene_ensembl",
                    version = "100")
