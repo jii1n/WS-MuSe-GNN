@@ -36,8 +36,8 @@ def cross_validate(model, X, labels, device, config, experiments, experiment_nam
 
     for fold, (train_index, val_index) in enumerate(stratified_k_fold.split(np.zeros(len(labels)), labels.values.reshape(-1), experiments)):
         val_indices_list.append(val_index)
-        Path(f"/data/bi1/results/neural/{experiment_name}").mkdir(parents=True, exist_ok=True)
-        f = open(f"/data/bi1/results/neural/{experiment_name}/fold_{fold}_training_progress.txt", "w")
+        Path(f"./results/neural/{experiment_name}").mkdir(parents=True, exist_ok=True)
+        f = open(f"./results/neural/{experiment_name}/fold_{fold}_training_progress.txt", "w")
         model.apply(model.weight_reset)
 
         if config.train_GNN:
@@ -155,7 +155,7 @@ epoch != 1 else epoch
     predicted_proportions.reset_index(inplace=True)
     predicted_proportions.columns = ['Longevity', 'Predicted Proportions']
 
-    f = open(f"/data/bi1/results/neural/{experiment_name}/best_model_stats.txt", "a")
+    f = open(f"./results/neural/{experiment_name}/best_model_stats.txt", "a")
     f.write(f"Best Epoch {best_epoch}. Loss: {loss}. Best Average Validation Accuracy: {max_val_acc}. "
             f"Best F1-scores: Micro: {avg_f1_scores_micro[max_val_index]:.4f}, Macro: {avg_f1_scores_macro[max_val_index]:.4f}, Weighted: {avg_f1_scores_weighted[max_
 val_index]:.4f}\n")
@@ -215,17 +215,17 @@ def test_epoch(loader, model, device):
                 pred = model(data)
             label = label.to(device)
             pred = pred.argmax(dim=1)
-            all_labels.extend(label.cpu().numpy())  # <EC><8B><A4><EC><A0><9C> <EB><9D><BC><EB><B2><A8> <EC>
+            all_labels.extend(label.cpu().numpy()) 
 
-            all_predictions.extend(pred.cpu().numpy())  # <EC><98><88><EC><B8><A1><EA><B0><92> <EC><A0><80><
+            all_predictions.extend(pred.cpu().numpy()) 
 
-            correct += pred.eq(label).sum().item()  # <EC><A0><95><ED><99><95><EB><8F><84> <EA><B3><84><EC><
+            correct += pred.eq(label).sum().item()  
 
 
     total = len(loader.dataset)
     val_acc = correct / total
 
-    # F1-score <EA><B3><84><EC><82><B0>
+    # F1-score 
     f1_scores= {
         'micro': f1_score(all_labels, all_predictions, average='micro'),
         'macro': f1_score(all_labels, all_predictions, average='macro'),
@@ -235,7 +235,7 @@ def test_epoch(loader, model, device):
     class_report = classification_report(all_labels, all_predictions, output_dict=True)
     class_f1_scores = {
         k: v['f1-score'] for k, v in class_report.items()
-        if k in ['0', '1', '2']  # <ED><81><B4><EB><9E><98><EC><8A><A4> <EB><9D><BC><EB><B2><A8><EC><9D><B4>
+        if k in ['0', '1', '2']  
  
     }
 
