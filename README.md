@@ -6,7 +6,7 @@ It contains the metadata, scripts and  model-ready demo dataset used in < 논문
 The full processed gene expression matrix
 (`getmm_combat_seq_no_outliers_and_singles_gene_expression.csv`)
 is not included due to file size restrictions.  
-However, **metadata, scripts, and execution-ready demo dataset** are provided, allowing users   
+However, metadata, scripts, and execution-ready demo dataset are provided, allowing users   
 to:
 - Run the machine learning pipeline immediately.
 - Reproduce the full dataset from public SRA resources if desired.
@@ -95,7 +95,7 @@ We provide a ready-to-use shell script that executes the machine learning pipeli
 To run the model:
 
 ```
-sh mlp_runs.sh
+bash mlp_runs.sh
 ```
 
 Example (inside the script):
