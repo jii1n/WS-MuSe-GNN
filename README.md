@@ -34,24 +34,81 @@ to:
 │   ├── labels.csv
 │   ├── age.csv
 │   └── sra_to_bioproject.csv
-
 ```
 
 
-## 🧪 1. Execution-ready Demo Dataset 
+## 🧪 method 1. Execution-ready Demo Dataset 
 
 To run the ML models without downloading large FASTQ files, 
 
+Example
 ```bash
-ex)
 python3 cv_neural.py \
   --expression_path gene_exp.csv \
   --label_path labels.csv \
   --age_path age.csv \
   --experiments_path sra_to_bioproject.csv
-
+```
 This dataset preserves the exact data structure expected by the ML pipeline.
 
 
+## 🔧 method 2. How to Reproduce the Full Expression Matrix
 
+The full expression matrix can be regenerated from public SRA data using the  
+steps below. All required metadata and processing scripts are provided.
 
+### Step 1 — Download FASTQ files from SRA
+Use IDs from:
+- `accession_list.txt`
+- `sra_to_bioproject.csv`
+- metadata files (*.p)
+  
+### Step 2 — Quantify reads using Kallisto
+
+### Step 3 — Merge all quantification outputs
+```
+Rscript combine_data.R
+```
+
+Produces:
+```
+combined_studies_raw_counts.Rdata
+```
+  
+### Step 4 — Normalize + batch correct
+
+Run:
+```
+Rscript getmm_and_combat_seq.R  
+```
+Produces:
+```
+getmm_combat_seq_no_outliers_and_singles_gene_expression.csv
+combat_seq_gene_expression_no_outliers_and_singles.Rdata
+getmm_gene_expression_no_outliers.csv
+```
+
+## 🚀 3. Running the Machine Learning Model
+
+We provide a ready-to-use shell script that executes the machine learning pipeline.
+
+To run the model:
+
+```
+sh mlp_runs.sh
+```
+
+Example (inside the script):
+
+```bash
+python3 cv_neural.py \
+    --expression_path demo_data/gene_exp_dummy.csv \
+    --label_path demo_data/labels_dummy.csv \
+    --age_path demo_data/age_dummy.csv \
+    --experiments_path demo_data/sra_to_bioproject_dummy.csv \
+    --mlp_hidden_dim 1024 \
+    --learning_rate 0.0001 \
+    --num_mlp_layers 3 \
+    --train_MLP \
+    --dropout 0.5
+```
