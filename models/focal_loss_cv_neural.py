@@ -94,8 +94,8 @@ if config.train_MLP:
                           f"-epochs_{epochs}-eval_every_{eval_model_every}-dropout_{config.dropout}-mlp_hidden_dim_{mlp_hidden_dim}" \
                           #f"-aging_genes_only_{aging_genes_only}" \
                           #f"-mlp_hidden_dim_{mlp_hidden_dim}-mixsplit_{mixsplit}-seed_{seed}-data_{data}"
-  
-    if not (os.path.exists(f"/data/bi1/results/neural/{mlp_experiment_name}/best_model_stats.txt")):
+
+    if not (os.path.exists(f"./results/neural/{mlp_experiment_name}/best_model_stats.txt")):
         #label_df = pd.read_csv(config.label_path)
         #targets = torch.tensor(label_df["longevity"].values, dtype=torch.long)
         print('Running cross validate with pure MLP')
