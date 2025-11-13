@@ -41,7 +41,7 @@ to:
 
 ## 🧪 method 1. Execution-ready Demo Dataset 
 
-To run the ML models without downloading large FASTQ files, 
+To run the ML models without downloading FASTQ files, 
 
 Example
 ```bash
