@@ -5,9 +5,8 @@ from torch.nn import BatchNorm1d, ReLU, Dropout
 class MLP(Seq):
     def __init__(self, input_dim, hidden_dim, output_dim, num_layers, dropout):
         layers = []
-        layers.append(Lin(input_dim, hidden_dim)) # 입력층 
-
-        # 은닉층
+        layers.append(Lin(input_dim, hidden_dim))
+        
         for i in range(num_layers - 2):
             layers.append(BatchNorm1d(hidden_dim))
             layers.append(ReLU())
@@ -16,7 +15,6 @@ class MLP(Seq):
             if (not (i == num_layers - 3)):
                 layers.append(Lin(hidden_dim, hidden_dim))
 
-        # 출력층
         layers.append(Lin(hidden_dim, output_dim))
 
         self.layers = layers
