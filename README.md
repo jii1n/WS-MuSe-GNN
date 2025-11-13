@@ -1,18 +1,20 @@
 # model(제목 수정)
 
-It contains the metadata, scripts and  model-ready demo dataset used in < 논문제목 > study
+It contains the metadata, scripts and  model-ready demo dataset 
+used in the study : < 논문제목 > 
 
 
 The full processed gene expression matrix
-(`getmm_combat_seq_no_outliers_and_singles_gene_expression.csv`)
+'getmm_combat_seq_no_outliers_and_singles_gene_expression.csv'
 is not included due to file size restrictions.  
-However, metadata, scripts, and execution-ready demo dataset are provided, allowing users   
+However, metadata, scripts, and execution-ready demo dataset are 
+provided, allowing users   
 to:
 - Run the machine learning pipeline immediately.
 - Reproduce the full dataset from public SRA resources if desired.
 
 
-## 📁 data
+## 📁 Data
 
 ```
 .
@@ -55,9 +57,9 @@ This dataset preserves the exact data structure expected by the ML pipeline.
 ## 🔧 method 2. How to Reproduce the Full Expression Matrix
 
 The full expression matrix can be regenerated from public SRA data using the  
-steps below. All required metadata and processing scripts are provided.
+steps below. All required metadata and processing scripts are included.
 
-### Step 1 — Download FASTQ files from SRA
+### Step 1 — Download FASTQ files
 Use IDs from:
 - `accession_list.txt`
 - `sra_to_bioproject.csv`
@@ -77,10 +79,10 @@ combined_studies_raw_counts.Rdata
   
 ### Step 4 — Normalize + batch correct
 
-Run:
 ```
 Rscript getmm_and_combat_seq.R  
 ```
+
 Produces:
 ```
 getmm_combat_seq_no_outliers_and_singles_gene_expression.csv
@@ -90,9 +92,10 @@ getmm_gene_expression_no_outliers.csv
 
 ## 🚀 3. Running the Machine Learning Model
 
-We provide a ready-to-use shell script that executes the machine learning pipeline.
+A ready-to-use shell script (`mlp_runs.sh`, 'focla_loss_mlp.sh', 'gnn_runs.sh', 'ws_muse_gnn_runs.sh') is provided to execute the ML
+pipeline.
 
-To run the model:
+To run:
 
 ```
 bash mlp_runs.sh
