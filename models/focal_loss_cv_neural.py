@@ -1,7 +1,7 @@
-## fecal_loss_cv_neural
+## focal_loss_cv_neural
 import torch
 from utils import cross_validate
-from neural_models.fecal_loss_mlp import MLP
+from neural_models.focal_loss_mlp import MLP
 from neural_models.gnn import GNN
 import os
 import argparse
@@ -11,24 +11,18 @@ from utils import load_train_test_datasets, load_data, get_num_genes
 from sklearn.metrics import confusion_matrix
 import numpy as np
 import pandas as pd
-# Gene Expression settings
-# Options:
-# getmm_gene_expression_no_outliers.csv for getmm, no outliers
-# getmm_combat_seq_no_outliers_and_singles_gene_expression.csv for getmm, combat-seq, no singles, no outliers
-# combat_seq_age_corrected_getmm_gene_expression_no_outliers.csv
-# combat_seq_age_corrected_day_1_and_older_getmm_gene_expression_no_outliers.csv
-# combat_seq_age_corrected_L4_and_younger_getmm_gene_expression_no_outliers.csv
-# combat_seq_getmm_GO_filtered_gene_expression_no_singles_and_outliers.csv
+
+
 parser.add_argument('--expression_path', type=str,
-                    default="/data/bi1/common_datastore/getmm_combat_seq_no_outliers_and_singles_gene_expression.csv",
+                    default="../data/getmm_combat_seq_no_outliers_and_singles_gene_expression.csv",
                     help='path to gene expression data '
-                         '(default: /data/bi1/common_datastore/getmm_combat_seq_no_outliers_and_singles_gene_expression.csv)')
-parser.add_argument('--label_path', type=str, default="/data/bi1/common_datastore/labels.csv",
-                    help='path to labels (default: /data/bi1/common_datastore/labels.csv)')
-parser.add_argument('--age_path', type=str, default="/data/bi1/common_datastore/age.csv",
-                    help='path to age data (default: /data/bi1/common_datastore/age.csv)')
-parser.add_argument('--experiments_path', type=str, default="/data/bi1/common_datastore/sra_to_bioproject.csv",
-                    help='path to sra to bioproject mapping (default: /data/bi1/common_datastore/sra_to_bioproject.csv)')
+                         '(default: ../data/getmm_combat_seq_no_outliers_and_singles_gene_expression.csv)')
+parser.add_argument('--label_path', type=str, default="../data/labels.csv",
+                    help='path to labels (default: ../data/labels.csv)')
+parser.add_argument('--age_path', type=str, default="../data/age.csv",
+                    help='path to age data (default: ../data/age.csv)')
+parser.add_argument('--experiments_path', type=str, default="../data/sra_to_bioproject.csv",
+                    help='path to sra to bioproject mapping (default: ../data/sra_to_bioproject.csv)')
 # MLP parameters
 parser.add_argument('--mlp_hidden_dim', type=int, default=512,
                     help='embedding dimensions (default: 512)')
@@ -95,11 +89,12 @@ torch.manual_seed(config.seed)
 
 
 if config.train_MLP:
-    mlp_experiment_name = f"ver4_Fecal_loss_MLP-num_mlp_layers_{num_mlp_layers}-num_folds_{num_folds}-alpha_{alpha}" \
+    mlp_experiment_name = f"Focal_loss_MLP-num_mlp_layers_{num_mlp_layers}-num_folds_{num_folds}-alpha_{alpha}" \
                           f"-lr_{learning_rate}-weight_decay_{weight_decay}-bs_{batch_size}" \
                           f"-epochs_{epochs}-eval_every_{eval_model_every}-dropout_{config.dropout}-mlp_hidden_dim_{mlp_hidden_dim}" \
                           #f"-aging_genes_only_{aging_genes_only}" \
                           #f"-mlp_hidden_dim_{mlp_hidden_dim}-mixsplit_{mixsplit}-seed_{seed}-data_{data}"
+  
     if not (os.path.exists(f"/data/bi1/results/neural/{mlp_experiment_name}/best_model_stats.txt")):
         #label_df = pd.read_csv(config.label_path)
         #targets = torch.tensor(label_df["longevity"].values, dtype=torch.long)
