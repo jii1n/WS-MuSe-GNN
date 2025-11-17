@@ -14,7 +14,7 @@ to:
 - Reproduce the full dataset from public SRA resources if desired.
 
 
-## 📁 Data
+## Data
 
 ```
 .
