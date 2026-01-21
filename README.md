@@ -1,7 +1,7 @@
 # model(제목 수정)
 
 It contains the metadata, scripts and  model-ready demo dataset 
-used in the study : < 논문제목 > 
+used in the study : Mitigating Class Imbalance in C. elegans Lifespan Classification via Interpretable Graph Neural Networks. 
 
 
 The full gene expression matrix
