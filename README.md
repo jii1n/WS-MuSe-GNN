@@ -1,4 +1,4 @@
-# model(제목 수정)
+# WS-Muse-GNN
 
 It contains the metadata, scripts and  model-ready demo dataset 
 used in the study : Mitigating Class Imbalance in C. elegans Lifespan Classification via Interpretable Graph Neural Networks. 
