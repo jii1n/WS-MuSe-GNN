@@ -90,12 +90,20 @@ epoch != 1 else epoch
                 y_true = [data.y.item() for data in xy_val_fold]
                 y_pred = epoch_predictions
 
-                for class_name, class_index in zip(['long-lived', 'normal-lived', 'short-lived'], [0, 1, 2]):
-                    class_indices = [i for i, val in enumerate(y_true) if val == class_index]
-                    class_y_true = [y_true[i] for i in class_indices]
-                    class_y_pred = [y_pred[i] for i in class_indices]
-                    class_f1 = f1_score(class_y_true, class_y_pred, average=None, zero_division=0)
-                    metrics['class_metrics'][class_name].append(np.mean(class_f1))
+                class_f1 = f1_score(
+                    y_true,
+                    y_pred,
+                    labels=[0, 1, 2],
+                    average=None,
+                    zero_division=0
+                )
+                
+                for class_name, class_index in zip(
+                    ['long-lived', 'normal-lived', 'short-lived'], [0, 1, 2]
+                ):
+                    best_class_f1_scores[class_name].append(
+                        class_f1[class_index]
+                    )
 
                 overall_micro_f1 = f1_score(y_true, y_pred, average='micro', zero_division=0)
                 overall_macro_f1 = f1_score(y_true, y_pred, average='macro', zero_division=0)
@@ -125,9 +133,14 @@ epoch != 1 else epoch
 
     max_val_acc = max(avg_val_accs_across_folds)
     max_val_index = avg_val_accs_across_folds.index(max_val_acc)
-    loss = avg_loss_across_folds[max_val_index]
-    best_epoch = max_val_index * config.eval_model_every if max_val_index != 1 else 1
-    best_epoch_index = int(best_epoch / config.eval_model_every)
+    
+    evaluated_epochs = [
+        epoch for epoch in range(1, epochs + 1)
+        if epoch == 1 or epoch % config.eval_model_every == 0
+    ]
+    
+    best_epoch = evaluated_epochs[max_val_index]
+    best_epoch_index = max_val_index
 
 
     best_class_f1_scores = {c: [] for c in ['long-lived', 'normal-lived', 'short-lived']}
