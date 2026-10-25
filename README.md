@@ -3,10 +3,11 @@
 It contains the metadata, scripts and  model-ready demo dataset 
 used in the study : Mitigating Class Imbalance in C. elegans Lifespan Classification via Interpretable Graph Neural Networks. 
 
+This study uses publicly available RNA-seq data from the meta-analysis by Bairakdar et al. (2023), A Meta-Analysis of RNA-Seq Studies to Identify Novel Genes that Regulate Aging. 
+The original study provides the preprocessing pipeline and processed gene expression data through its publicly available Github and Docker environment (mdanb/aging_rna_seq_metaanalysis). 
+This repository also includes metadata and preprocessing scripts obtained from the original study. 
 
-The full gene expression matrix
-(`getmm_combat_seq_no_outliers_and_singles_gene_expression.csv`)
-is not included due to file size restrictions.  
+The full gene expression matrix  is not included in this repository due to file size limitations.
 However, metadata, scripts, and execution-ready demo dataset are 
 provided, allowing users   
 to:
