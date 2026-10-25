@@ -143,22 +143,35 @@ epoch != 1 else epoch
     best_epoch_index = max_val_index
 
 
-    best_class_f1_scores = {c: [] for c in ['long-lived', 'normal-lived', 'short-lived']}
+    best_class_f1_scores = {
+        c: [] for c in ['long-lived', 'normal-lived', 'short-lived']
+    }
+    
     for fold in range(num_folds):
         xy_val_fold = val_folds_data[fold]
+    
         y_true = [data.y.item() for data in xy_val_fold]
         y_pred = fold_predictions[fold][best_epoch_index]
-
-
-        y_pred = fold_predictions[fold][best_epoch_index]
-        for class_name, class_index in zip(['long-lived', 'normal-lived', 'short-lived'], [0, 1, 2]):
-            class_indices = [i for i, val in enumerate(y_true) if val == class_index]
-            class_y_true = [y_true[i] for i in class_indices]
-            class_y_pred = [y_pred[i] for i in class_indices]
-            class_f1 = f1_score(class_y_true, class_y_pred, average=None, zero_division=0)
-            best_class_f1_scores[class_name].append(np.mean(class_f1))
-
-    best_class_f1_scores_avg = {cls: np.mean(vals) for cls, vals in best_class_f1_scores.items()}
+    
+        class_f1 = f1_score(
+            y_true,
+            y_pred,
+            labels=[0, 1, 2],
+            average=None,
+            zero_division=0
+        )
+    
+        for class_name, class_index in zip(
+            ['long-lived', 'normal-lived', 'short-lived'], [0, 1, 2]
+        ):
+            best_class_f1_scores[class_name].append(
+                class_f1[class_index]
+            )
+    
+    best_class_f1_scores_avg = {
+        cls: np.mean(vals)
+        for cls, vals in best_class_f1_scores.items()
+    }
     individual_fold_performances = [row[best_epoch_index] for row in metrics['all_val_accs']]
     best_predictions_per_fold = [preds[best_epoch_index] for preds in fold_predictions]
     best_preds = [pred for preds in best_predictions_per_fold for pred in preds]
