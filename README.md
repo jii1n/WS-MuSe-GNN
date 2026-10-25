@@ -12,8 +12,8 @@ However, metadata, scripts, and execution-ready demo dataset are
 provided, allowing users   
 to:
 - Run the machine learning pipeline immediately.
-- Reproduce the full dataset from public SRA resources if desired.
-
+- Access the processed gene expression data through the GitHub repository and Docker environment (mdanb/aging_rna_seq_metaanalysis).
+- Reconstruct the gene expression dataset from publicly available SRA data
 
 ## Data
 
