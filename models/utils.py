@@ -50,7 +50,7 @@ def cross_validate(model, X, labels, device, config, experiments, experiment_nam
 
         opt = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
         train_loader = DataLoader(xy_train_fold, batch_size=batch_size, shuffle=True)
-        val_loader = DataLoader(xy_val_fold, batch_size=batch_size, shuffle=True)
+        val_loader = DataLoader(xy_val_fold, batch_size=batch_size, shuffle=False)
 
         fold_val_accs = []
         fold_losses = []
